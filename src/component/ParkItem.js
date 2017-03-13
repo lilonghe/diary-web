@@ -1,14 +1,6 @@
 import React, {Component} from 'react';
 
-import {Card, CardHeader,CardText} from 'material-ui/Card';
-import {deepOrange500} from 'material-ui/styles/colors';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500,
-  },
-});
+import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 
 class ParkItem extends Component {
     constructor(props){
@@ -23,13 +15,11 @@ class ParkItem extends Component {
         return (
             
             <div className="park-item">
-                <MuiThemeProvider muiTheme={muiTheme}>
                     <Card>
                         <CardHeader
-                            title={this.state.diary.user.name}/>
+                        title={this.state.diary.user.name} subtitle={this.state.diary.date.substr(0,10)} />
                             <CardText>{this.state.diary.content}</CardText>
                     </Card>
-                </MuiThemeProvider>
             </div>
         );
     }
