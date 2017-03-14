@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 
 import ParkItem from '../../component/ParkItem';
-import 'whatwg-fetch';
-
+import Request from '../../config/request';
 class Park extends Component {
     constructor(props){
         super(props);
@@ -10,13 +9,9 @@ class Park extends Component {
             diaries: []
         };
         let that = this;
-        fetch('http://127.0.0.1:8360/api/diary?token=ee1a298dc99c466be0f4c963152e6a78',{
-            method: 'GET'
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                that.setState({diaries: data.data})
-            });
+        Request.diaryList(null, (err) => { }, (data) => {
+            that.setState({diaries:data.data})
+        });
     }
 
     render(){
