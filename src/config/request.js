@@ -33,4 +33,23 @@ export default new class Request {
                 success && success(data);
             });
     }
+
+    reg(param, fail, success) {
+        fetch('/api/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(param)
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.errno == 0) {
+
+                    success && success(data);
+                } else {
+                    fail && fail(data);
+                }
+            });
+    }
 }

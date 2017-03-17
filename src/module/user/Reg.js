@@ -6,34 +6,31 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import Request from '../../config/request';
 import { browserHistory } from 'react-router';
-export default class Login extends Component {
+export default class Reg extends Component {
     constructor(props) {
         super(props);
         this.state = {
             account: '',
             pass: '',
             open: false,
-            errmsg: ''
+            errmsg: '',
+            invite: ''
         };
     }
 
-    login() {
+    reg() {
         var that = this;
-        Request.login({ name: this.state.account, pass: this.state.pass }, (err) => {
+        Request.reg({ name: this.state.account, pass: this.state.pass,invite: this.state.invite }, (err) => {
             this.setState({
                 open: true,
                 errmsg: err.errmsg
             });
         }, (data) => {
-            localStorage.setItem('user', JSON.stringify(data.data));
-            let path = '/park';
-            browserHistory.push(path)
+            let path = '/login';
+            browserHistory.push(path);
         });
-    }
 
-    goReg() {
-        let path = '/reg';
-        browserHistory.push(path)
+
     }
 
     render() {
@@ -42,12 +39,12 @@ export default class Login extends Component {
                 <div className="wrapper">
                     <Card>
                         <CardText>
-                            <TextField floatingLabelText="Account" hintText="Account:" value={this.state.account} onChange={(event, value) => this.setState({account:value})} /><br />
-                            <TextField floatingLabelText="Pass" hintText="Pass:" type="password" value={this.state.pass} onChange={(event, value) => this.setState({ pass: value })} />
+                            <TextField floatingLabelText="Account" hintText="Account:" value={this.state.account} onChange={(event, value) => this.setState({ account: value })} /><br />
+                            <TextField floatingLabelText="Pass" hintText="Pass:" type="password" value={this.state.pass} onChange={(event, value) => this.setState({ pass: value })} /><br />
+                            <TextField floatingLabelText="Invite" hintText="Invite:" value={this.state.invite} onChange={(event, value) => this.setState({ invite: value })} />
                         </CardText>
                         <CardActions>
-                            <RaisedButton onClick={this.login.bind(this)} label="submit" primary={true} />
-                            <RaisedButton onClick={this.goReg} label="register" />
+                            <RaisedButton onClick={this.reg.bind(this)} label="submit" primary={true} />
                         </CardActions>
                     </Card>
                 </div>

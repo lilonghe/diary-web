@@ -7,6 +7,7 @@ import {Router,Route,browserHistory,IndexRoute} from 'react-router';
 
 import Park from './module/park/Park';
 import Login from './module/user/Login';
+import Reg from './module/user/Reg';
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <IndexRoute component={Park} />
       <Route path='/park' component={Park} />
       <Route path='/login' component={Login} />
+      <Route path='/reg' component={Reg} />
 
     </Route>
   </Router>,
