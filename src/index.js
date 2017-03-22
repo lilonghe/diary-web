@@ -9,6 +9,10 @@ import Park from './module/park/Park';
 import Login from './module/user/Login';
 import Reg from './module/user/Reg';
 
+
+import DiaryList from './module/admin/diary/List';
+import CreateDiary from './module/admin/diary/Create';
+
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path='/' component={App}>
@@ -17,6 +21,8 @@ ReactDOM.render(
       <Route path='/login' component={Login} />
       <Route path='/reg' component={Reg} />
 
+      <Route path="/admin/diary" component={DiaryList} />
+			<Route path="/admin/diary/create" component={CreateDiary} />
     </Route>
   </Router>,
   document.getElementById('root')

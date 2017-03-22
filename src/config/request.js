@@ -34,6 +34,20 @@ export default new class Request {
             });
     }
 
+    userDiaryList(param, fail, success) {
+        let user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            window.location.href = '/login';
+        }
+        fetch('/api/user/diary?token=' + user.token, {
+            method: 'GET'
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                success && success(data);
+            });
+    }
+
     reg(param, fail, success) {
         fetch('/api/user', {
             method: 'POST',

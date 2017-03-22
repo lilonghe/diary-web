@@ -16,8 +16,8 @@ class ParkItem extends Component {
             
             <div className="park-item">
                     <Card>
-                        <CardHeader
-                        title={this.state.diary.user.name} subtitle={this.state.diary.date.substr(0,10)} />
+                        {/*<CardHeader
+                        title={this.state.diary.user.name} subtitle={this.state.diary.date.substr(0,10)} />*/}
                             <CardText>{this.state.diary.content}</CardText>
                     </Card>
             </div>

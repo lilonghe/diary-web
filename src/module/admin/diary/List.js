@@ -1,36 +1,43 @@
 import React, {Component} from 'react';
 
-import ParkItem from '../../component/ParkItem';
-import Request from '../../config/request';
+import ParkItem from '../../../component/ParkItem';
+import Request from '../../../config/request';
 import Chip from 'material-ui/Chip';
-class Park extends Component {
+
+class DiaryList extends Component {
     constructor(props){
         super(props);
         this.state = {
             diaries: []
         };
         let that = this;
-        Request.diaryList(null, (err) => { }, (data) => {
+        Request.userDiaryList(null, (err) => { }, (data) => {
             that.setState({diaries:data.data.data})
         });
     }
 
     render(){
-        const diaries = this.state.diaries.map((diary) => {
+        let diaries = this.state.diaries.map((diary) => {
             return (
                 <ParkItem key={diary.id} value={diary} />
             )
         });
-
+        let no_one = '';
+        if(!this.state.diaries.length>0) {
+            diaries = (
+                <div>no one.</div>
+            )
+        }
+        
         return (
             <div className="page-park">
                 <div className="wrapper">
-                     <Chip className="header-tip"> Park </Chip>
-                        {diaries}
+                    <Chip className="header-tip"> My Diary </Chip>
+                    {diaries}  
                 </div>
             </div>
         );
     }
 }
 
-export default Park;
+export default DiaryList;

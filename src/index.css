@@ -14,3 +14,9 @@ body {
 .park-item{
   margin-bottom: 20px;
 }
+a{
+  text-decoration: none;
+}
+.header-tip{
+  margin-bottom: 20px !important;
+}
