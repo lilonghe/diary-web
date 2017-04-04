@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
-
+import marked from 'marked';
 class ParkItem extends Component {
     constructor(props){
         super(props);
@@ -12,13 +12,12 @@ class ParkItem extends Component {
     
 
     render(){
+        var html = marked(this.state.diary.content);
         return (
             
             <div className="park-item">
                     <Card>
-                        {/*<CardHeader
-                        title={this.state.diary.user.name} subtitle={this.state.diary.date.substr(0,10)} />*/}
-                            <CardText>{this.state.diary.content}</CardText>
+                            <CardText dangerouslySetInnerHTML={{__html: html}}></CardText>
                     </Card>
             </div>
         );

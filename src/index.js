@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
+import './editor.css';
 
 import {Router,Route,browserHistory,IndexRoute} from 'react-router';
 
