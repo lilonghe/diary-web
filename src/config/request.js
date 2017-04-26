@@ -4,7 +4,11 @@ import { browserHistory } from 'react-router';
 export default new class Request {
 
     constructor(){
-        this.user = JSON.parse(localStorage.getItem('user'));
+        try{
+            this.user = JSON.parse(localStorage.getItem('user'));
+        }catch(err){
+            localStorage.clear();
+        }
     }
 
     get(param){

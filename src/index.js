@@ -14,17 +14,21 @@ import Reg from './module/user/Reg';
 import DiaryList from './module/admin/diary/List';
 import CreateDiary from './module/admin/diary/Create';
 
-ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path='/' component={App}>
-      <IndexRoute component={Park} />
-      <Route path='/park' component={Park} />
-      <Route path='/login' component={Login} />
-      <Route path='/reg' component={Reg} />
+import { Provider } from 'mobx-react';
 
-      <Route path="/admin/diary" component={DiaryList} />
-			<Route path="/admin/diary/create" component={CreateDiary} />
-    </Route>
-  </Router>,
+ReactDOM.render(
+  <Provider>
+    <Router history={browserHistory}>
+      <Route path='/' component={App}>
+        <IndexRoute component={Park} />
+        <Route path='/park' component={Park} />
+        <Route path='/login' component={Login} />
+        <Route path='/reg' component={Reg} />
+
+        <Route path="/admin/diary" component={DiaryList} />
+        <Route path="/admin/diary/create" component={CreateDiary} />
+      </Route>
+  </Router>
+  </Provider>,
   document.getElementById('root')
 );

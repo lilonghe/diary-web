@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import Request from '../../config/request';
 import { browserHistory } from 'react-router';
+import store from '../../store/appStore';
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +16,7 @@ export default class Login extends Component {
             open: false,
             errmsg: ''
         };
+        console.log(props.appStore);
     }
 
     login() {
@@ -25,7 +27,9 @@ export default class Login extends Component {
                 errmsg: err.errmsg
             });
         }, (data) => {
+            
             localStorage.setItem('user', JSON.stringify(data.data));
+            store.executeLogin();
             let path = '/park';
             browserHistory.push(path)
         });
