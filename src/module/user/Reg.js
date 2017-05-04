@@ -5,7 +5,7 @@ import { Card, CardHeader, CardText, CardActions } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import Request from '../../config/request';
-import { browserHistory } from 'react-router';
+
 export default class Reg extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ export default class Reg extends Component {
             });
         }, (data) => {
             let path = '/login';
-            browserHistory.push(path);
+            this.props.history.push(path);
         });
 
 
