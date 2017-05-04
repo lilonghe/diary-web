@@ -5,7 +5,7 @@ import { Card, CardHeader, CardText, CardActions } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import Request from '../../config/request';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import store from '../../store/appStore';
 export default class Login extends Component {
     constructor(props) {
@@ -30,14 +30,13 @@ export default class Login extends Component {
             
             localStorage.setItem('user', JSON.stringify(data.data));
             store.executeLogin();
-            let path = '/park';
-            browserHistory.push(path)
+            this.props.history.push('/')
         });
     }
 
     goReg() {
         let path = '/reg';
-        browserHistory.push(path)
+        this.props.history.push(path)
     }
 
     render() {
@@ -51,7 +50,7 @@ export default class Login extends Component {
                         </CardText>
                         <CardActions>
                             <RaisedButton onClick={this.login.bind(this)} label="submit" primary={true} />
-                            <RaisedButton onClick={this.goReg} label="register" />
+                            <RaisedButton onClick={this.goReg.bind(this)} label="register" />
                         </CardActions>
                     </Card>
                 </div>

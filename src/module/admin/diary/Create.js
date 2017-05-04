@@ -8,7 +8,6 @@ import Chip from 'material-ui/Chip';
 import marked from 'marked';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { browserHistory } from 'react-router';
 import Snackbar from 'material-ui/Snackbar';
 
 class DiaryCreate extends Component {
@@ -37,7 +36,7 @@ class DiaryCreate extends Component {
             });
         },() => {
             let path = '/admin/diary';
-            browserHistory.push(path);
+            this.props.history.push(path);
         });
     }
 

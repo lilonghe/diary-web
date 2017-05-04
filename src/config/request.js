@@ -31,8 +31,12 @@ export default new class Request {
             .then((data) => {
                 if(data.errno==0)
                     param.success && param.success(data);
-                else
-                    param.fail && param.fail(data);
+                else{
+                    if(data.errno==1002){
+                        localStorage.removeItem('user');
+                    }
+                    param.fail && param.fail(data);                    
+                }
             });
     }
 
@@ -51,8 +55,12 @@ export default new class Request {
             .then((data) => {
                 if(data.errno==0)
                     param.success && param.success(data);      
-                else
-                    param.fail && param.fail(data);          
+                else{
+                    if(data.errno==1002){
+                        localStorage.removeItem('user');
+                    }
+                    param.fail && param.fail(data);                    
+                }
             });
     }
 

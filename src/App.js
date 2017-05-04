@@ -6,13 +6,23 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
-import { browserHistory,Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Utils from './common/utils';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin()
 
 import store from './store/appStore';
+
+import {Router,Route, BrowserRouter, Redirect} from 'react-router-dom';
+
+import Park from './module/park/Park';
+import Login from './module/user/Login';
+import Reg from './module/user/Reg';
+
+
+import DiaryList from './module/admin/diary/List';
+import CreateDiary from './module/admin/diary/Create';
 class App extends Component {
 
   constructor(props){
@@ -20,24 +30,23 @@ class App extends Component {
     this.state = {
       user: {}
     };
-    
+    let that = this;
     store.addLoginCallBack(function(){
-      console.log(Utils.getItem('user'));
-      this.setState({
+      that.setState({
         user: JSON.parse(Utils.getItem('user'))
       });
     }.bind(this));
   }
 
   componentWillMount(){
-     let user = Utils.getItem('user');
-    if(user){
-      user = JSON.parse(user);
-      store.executeLogin();
-    }else{
-      let path = '/login';
-      browserHistory.replace(path);
-    }
+    store.executeLogin();
+  }
+
+  logout(){
+    store.logout();
+    this.setState({
+      user: {}
+    })
   }
 
   render() {
@@ -47,31 +56,52 @@ class App extends Component {
           <ul>
             <li><Link to="/admin/diary">{this.state.user.name}</Link></li>
             <li><Link to="/admin/diary/create">Create</Link></li>
+            <li onClick={this.logout.bind(this)}>Logout</li>            
           </ul>
         )
       }else{
-        status = <ul></ul>;
+        status = (<ul>
+          <li><Link to="/login">Login</Link></li>
+        </ul>)
+      }
+
+      var body;
+      if(this.state.user.name){
+        body = (
+          <div className="body">
+            <Route exact path='/' component={Park} />
+            <Route path='/login' component={Login} />
+            <Route path='/reg' component={Reg} />
+            <Route path='/logout' component={Login} />
+            <Route exact path="/admin/diary" component={DiaryList} />
+            <Route path="/admin/diary/create" component={CreateDiary} />
+          </div>
+        )
+      }else{
+        body = (
+          <div className="body">
+            <Route exact path='/' component={Login} />
+            <Route path='/login' component={Login} />
+            <Route path='/reg' component={Reg} />
+
+            <Redirect to={'/login'} />
+          </div>
+        )
       }
       return (
-          <MuiThemeProvider muiTheme={getMuiTheme()}>
+          <BrowserRouter>
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
               <div>
                 <header>
-                  <div className="copy">Diary</div>
-
+                  <div className="copy"><Link to="/">Diary</Link></div>
                   {status}
                 </header>
-                {/*<Drawer docked={false} width={200}>
-                  <Link onTouchTap={ this.handleToggle.bind(this)} to="/"><MenuItem onTouchTap={this.handleClose}>Main</MenuItem></Link>
-                  <Link onTouchTap={ this.handleToggle.bind(this)} to="/admin/diary"><MenuItem onTouchTap={this.handleClose}>My Diary</MenuItem></Link>
-                  <Link onTouchTap={ this.handleToggle.bind(this)} to="/admin/diary/create"><MenuItem onTouchTap={this.handleClose}>Create Diary</MenuItem></Link>
-                </Drawer>*/}
 
-                <div className="body">
-                  {this.props.children}
-                </div>
+                {body}
               </div>
-              
-          </MuiThemeProvider>
+            </MuiThemeProvider>
+          </BrowserRouter>
+          
     );
   }
 }

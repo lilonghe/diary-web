@@ -13,12 +13,16 @@ class AppStore{
     }
 
     executeLogin(){
+        let user = localStorage.getItem('user');
+        if(!user) return;
         this.login = true;
         for(let i=0; i<this.loginCallBack.length; i++){
-            if(this.loginCallBack[i]){
-                this.loginCallBack[i]();
-            }
+            this.loginCallBack[i] && this.loginCallBack[i]();
         }
+    }
+
+    logout(){
+        localStorage.clear();
     }
 }
 const store = new AppStore();

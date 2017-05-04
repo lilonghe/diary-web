@@ -19,7 +19,7 @@ class DiaryList extends Component {
     render(){
         let diaries = this.state.diaries.map((diary) => {
             return (
-                <ParkItem key={diary.id} value={diary} />
+                <ParkItem key={diary.create_time+Math.random()} value={diary} />
             )
         });
         let no_one = '';

@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import './editor.css';
 
-import {Router,Route,browserHistory,IndexRoute} from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import Park from './module/park/Park';
 import Login from './module/user/Login';
@@ -14,21 +14,10 @@ import Reg from './module/user/Reg';
 import DiaryList from './module/admin/diary/List';
 import CreateDiary from './module/admin/diary/Create';
 
-import { Provider } from 'mobx-react';
 
 ReactDOM.render(
-  <Provider>
-    <Router history={browserHistory}>
-      <Route path='/' component={App}>
-        <IndexRoute component={Park} />
-        <Route path='/park' component={Park} />
-        <Route path='/login' component={Login} />
-        <Route path='/reg' component={Reg} />
-
-        <Route path="/admin/diary" component={DiaryList} />
-        <Route path="/admin/diary/create" component={CreateDiary} />
-      </Route>
-  </Router>
-  </Provider>,
+    <Router>
+      <App />
+    </Router>,
   document.getElementById('root')
 );
