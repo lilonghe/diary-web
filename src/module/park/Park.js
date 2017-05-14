@@ -16,11 +16,17 @@ class Park extends Component {
     }
 
     render(){
-        const diaries = this.state.diaries.map((diary) => {
+        var diaries = this.state.diaries.map((diary) => {
             return (
                 <ParkItem key={diary.create_time+Math.random()} value={diary} />
             )
         });
+
+        if(this.state.diaries.length < 1){
+            diaries = (
+                <div>还木有啦～</div>
+            )
+        }
 
         return (
             <div className="page-park">
