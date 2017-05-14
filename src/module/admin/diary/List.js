@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import ParkItem from '../../../component/ParkItem';
 import Request from '../../../config/request';
-import Chip from 'material-ui/Chip';
+// import Chip from 'material-ui/Chip';
 
 class DiaryList extends Component {
     constructor(props){
@@ -31,7 +31,7 @@ class DiaryList extends Component {
         return (
             <div className="page-park">
                 <div className="wrapper">
-                    <Chip className="header-tip"> My Diary </Chip>
+                    <div className="header-tip"> My Diary </div>
                     {diaries}  
                 </div>
             </div>

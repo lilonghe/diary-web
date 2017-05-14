@@ -1,80 +1,68 @@
 import React, { Component } from 'react';
-import TextField from 'material-ui/TextField';
-import { Card, CardHeader, CardText, CardActions } from 'material-ui/Card';
+import {Link} from 'react-router-dom';
+import { Form, Icon, Input, Button, Checkbox, notification } from 'antd';
+const FormItem = Form.Item;
 
-import RaisedButton from 'material-ui/RaisedButton';
-import Snackbar from 'material-ui/Snackbar';
-import Request from '../../config/request';
+import request from '../../config/request';
 import { withRouter } from 'react-router-dom';
 import store from '../../store/appStore';
-export default class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            account: '',
-            pass: '',
-            open: false,
-            errmsg: ''
-        };
-        console.log(props.appStore);
     }
 
-    login() {
-        var that = this;
-        Request.login({ name: this.state.account, pass: this.state.pass }, (err) => {
-            this.setState({
-                open: true,
-                errmsg: err.errmsg
-            });
-        }, (data) => {
-            
-            localStorage.setItem('user', JSON.stringify(data.data));
-            store.executeLogin();
-            this.props.history.push('/')
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                var that = this;
+                request.login({ name: values.userName, pass: values.password }, (err) => {
+                    console.log(err);
+                    notification['error']({
+                        message: '登录失败',
+                        description: err.errmsg,
+                    });
+                }, (data) => {
+                    localStorage.setItem('user', JSON.stringify(data.data));
+                    store.executeLogin();
+                    this.props.history.push('/')
+                });
+            }
         });
-    }
-
-    goReg() {
-        let path = '/reg';
-        this.props.history.push(path)
     }
 
     render() {
+        const {getFieldDecorator} = this.props.form;
         return (
-            <div className="page-login">
-                <div className="wrapper">
-                    <Card>
-                        <CardText>
-                            <TextField floatingLabelText="Account" hintText="Account:" value={this.state.account} onChange={(event, value) => this.setState({account:value})} /><br />
-                            <TextField floatingLabelText="Pass" hintText="Pass:" type="password" value={this.state.pass} onChange={(event, value) => this.setState({ pass: value })} />
-                        </CardText>
-                        <CardActions>
-                            <RaisedButton onClick={this.login.bind(this)} label="submit" primary={true} />
-                            <RaisedButton onClick={this.goReg.bind(this)} label="register" />
-                        </CardActions>
-                    </Card>
-                </div>
-                <Snackbar
-                    className="errtip"
-                    open={this.state.open}
-                    message={this.state.errmsg}
-                    autoHideDuration={4000}
-                    onRequestClose={this.handleRequestClose}
-                />
+            <div className="page page-login wrapper">
+                <Form onSubmit={this.handleSubmit} className="login-form">
+                    <FormItem>
+                    {getFieldDecorator('userName', {
+                        rules: [{ required: true, message: 'Please input your username!' }],
+                    })(
+                        <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
+                    )}
+                    </FormItem>
+                    <FormItem>
+                    {getFieldDecorator('password', {
+                        rules: [{ required: true, message: 'Please input your Password!' }],
+                    })(
+                        <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+                    )}
+                    </FormItem>
+                    <FormItem>
+                    
+                    <Button type="primary" htmlType="submit" className="login-form-button">
+                        Log in
+                    </Button> Or <Link to="/reg">register now!</Link>
+                    </FormItem>
+                </Form>
+                
             </div>
         );
     }
-
-    handleTouchTap = () => {
-        this.setState({
-            open: true,
-        });
-    };
-
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
-    };
-
 }
+
+
+const LoginPage = Form.create()(Login);
+export default LoginPage;

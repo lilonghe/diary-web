@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import { Link } from 'react-router-dom';
 import Utils from './common/utils';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin()
+import {Layout, Menu, notification} from 'antd';
+const { Header, Content, Footer, Sider } = Layout;
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 import store from './store/appStore';
-
 import {Router,Route, BrowserRouter, Redirect} from 'react-router-dom';
 
 import Park from './module/park/Park';
 import Login from './module/user/Login';
 import Reg from './module/user/Reg';
-
-
 import DiaryList from './module/admin/diary/List';
 import CreateDiary from './module/admin/diary/Create';
+
 class App extends Component {
 
   constructor(props){
@@ -40,6 +32,11 @@ class App extends Component {
 
   componentWillMount(){
     store.executeLogin();
+    notification.config({
+          placement: 'bottomRight',
+          bottom: 50,
+          duration: 3,
+    });
   }
 
   logout(){
@@ -53,56 +50,49 @@ class App extends Component {
       var status;
       if(this.state.user.name){
         status = (
-          <ul>
-            <li><Link to="/admin/diary">{this.state.user.name}</Link></li>
-            <li><Link to="/admin/diary/create">Create</Link></li>
-            <li onClick={this.logout.bind(this)}>Logout</li>            
-          </ul>
+          <Menu mode="horizontal">
+            <SubMenu title={this.state.user.name}>
+              <Menu.Item><Link to="/admin/diary">List</Link></Menu.Item>
+              <Menu.Item><Link to="/admin/diary/create">Create</Link></Menu.Item>
+              <Menu.Item><span  onClick={this.logout.bind(this)}>Logout</span></Menu.Item>
+            </SubMenu>
+          </Menu>
         )
       }else{
-        status = (<ul>
+        status = (<ul className='no-login'>
           <li><Link to="/login">Login</Link></li>
         </ul>)
       }
-
-      var body;
-      if(this.state.user.name){
-        body = (
-          <div className="body">
-            <Route exact path='/' component={Park} />
-            <Route path='/login' component={Login} />
-            <Route path='/reg' component={Reg} />
-            <Route path='/logout' component={Login} />
-            <Route exact path="/admin/diary" component={DiaryList} />
-            <Route path="/admin/diary/create" component={CreateDiary} />
-          </div>
-        )
-      }else{
-        body = (
-          <div className="body">
-            <Route exact path='/' component={Login} />
-            <Route path='/login' component={Login} />
-            <Route path='/reg' component={Reg} />
-
-            <Redirect to={'/login'} />
-          </div>
-        )
-      }
       return (
-          <BrowserRouter>
-            <MuiThemeProvider muiTheme={getMuiTheme()}>
-              <div>
-                <header>
-                  <div className="copy"><Link to="/">Diary</Link></div>
-                  {status}
-                </header>
-
-                {body}
-              </div>
-            </MuiThemeProvider>
-          </BrowserRouter>
+            <Layout className='layout'>
+              <header>
+                <div className='copy'>
+                  <Link to="/">Diary</Link>
+                </div>
+                {status}
+              </header>
+              <Content style={{ padding: '0 50px' }} className='content'>
+                <Route path='/login' component={Login} />
+                <Route path='/reg' component={Reg} />
+                
+                {
+                  !this.state.user.name ? <Redirect to={'/login'} />:(
+                    <div>
+                    <Route exact path='/' component={Park} />                  
+                    <Route path='/logout' component={Login} />
+                    <Route exact path="/admin/diary" component={DiaryList} />
+                    <Route path="/admin/diary/create" component={CreateDiary} />
+                    </div>
+                  )
+                }
+              </Content>
+              <footer>Diary @2017</footer>
+            </Layout>
+            
           
     );
   }
 }
 export default App;
+
+

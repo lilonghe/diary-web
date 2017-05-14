@@ -1,13 +1,22 @@
 import 'whatwg-fetch';
-import { browserHistory } from 'react-router';
 
-export default new class Request {
-
+class Request {
     constructor(){
         try{
             this.user = JSON.parse(localStorage.getItem('user'));
         }catch(err){
             localStorage.clear();
+        }
+    }
+
+    checkStatus(response) {
+        if (response.status >= 200 && response.status < 300) {
+            return response
+        } else {
+            // var error = new Error(response.statusText)
+            // error.response = response;
+            var error = {errno: response.status, errmsg: response.statusText};
+            throw error
         }
     }
 
@@ -51,6 +60,7 @@ export default new class Request {
             },
             body: JSON.stringify(param.data)
         })
+            .then(this.checkStatus)
             .then((res) => res.json())
             .then((data) => {
                 if(data.errno==0)
@@ -61,6 +71,9 @@ export default new class Request {
                     }
                     param.fail && param.fail(data);                    
                 }
+            })
+            .catch((err) => {
+                param.fail && param.fail(err);
             });
     }
 
@@ -113,3 +126,6 @@ export default new class Request {
         });
     }
 }
+
+const request = new Request();
+export default request;

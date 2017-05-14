@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 import ParkItem from '../../component/ParkItem';
 import Request from '../../config/request';
-import Chip from 'material-ui/Chip';
+// import Chip from 'material-ui/Chip';
+// import {Tag} from 'antd';
 class Park extends Component {
     constructor(props){
         super(props);
@@ -29,9 +30,9 @@ class Park extends Component {
         }
 
         return (
-            <div className="page-park">
+            <div className="page page-park">
                 <div className="wrapper">
-                     <Chip className="header-tip"> Park </Chip>
+                     <div className="header-tip"> Park </div>
                         {diaries}
                 </div>
             </div>

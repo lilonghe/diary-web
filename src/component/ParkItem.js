@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
-import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+// import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+import {Card} from 'antd';
 import marked from 'marked';
 class ParkItem extends Component {
     constructor(props){
@@ -16,8 +17,8 @@ class ParkItem extends Component {
         return (
             
             <div className="park-item">
-                    <Card>
-                            <CardText dangerouslySetInnerHTML={{__html: html}}></CardText>
+                    <Card title="" >
+                        <p dangerouslySetInnerHTML={{__html: html}}></p>
                     </Card>
             </div>
         );
