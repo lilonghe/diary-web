@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Utils from './common/utils';
 import {Layout, Menu, notification} from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
@@ -7,18 +6,28 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 import store from './store/appStore';
-import {Router,Route, BrowserRouter, Redirect} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Redirect, Link, withRouter} from 'react-router-dom';
 
 import Park from './module/park/Park';
 import Login from './module/user/Login';
 import Reg from './module/user/Reg';
 import DiaryList from './module/admin/diary/List';
-import CreateDiary from './module/admin/diary/Create';
+// import CreateDiary from './module/admin/diary/Create';
+
+import Dynamic from './common/Dynamic';
+
+const lazyLoad = (func, props) => {
+  console.log(props);
+    return <Dynamic load={func}>
+        {(Com) => (<Com {...props} />)}
+    </Dynamic>
+}
 
 class App extends Component {
 
   constructor(props){
     super(props);
+    console.log(props);
     this.state = {
       user: {}
     };
@@ -47,6 +56,10 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
+    const CreateDiary = () => lazyLoad(() => import('./module/admin/diary/Create'),this.props);
+      
+
       var status;
       if(this.state.user.name){
         status = (
@@ -93,6 +106,6 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default withRouter(App);
 
 

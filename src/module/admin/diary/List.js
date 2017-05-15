@@ -7,6 +7,7 @@ import Request from '../../../config/request';
 class DiaryList extends Component {
     constructor(props){
         super(props);
+        console.log(props);
         this.state = {
             diaries: []
         };
