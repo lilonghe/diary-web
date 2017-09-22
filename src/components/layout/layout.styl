@@ -1,10 +1,21 @@
 .userControl {
     float: right;
 
+    a{
+        color: #FFF;
+    }
     ul li {
         transition: all .2s;
+        
     }
-    ul li:hover {
+    ul li:hover {
+        background-color:#FFF;
+        color:  #00bcd4;
+    }
+}
+
+:global {
+    header ul a.active li {
         background-color:#FFF;
         color:  #00bcd4;
     }

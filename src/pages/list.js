@@ -1,13 +1,12 @@
 import React,{ Component } from 'react';
 import styles from "./index.styl";
 
-export default class Test extends Component {
+export default class List extends Component {
     render() {
-        console.log(styles);
         return (
             <div>
                 Hope you have fun.
-                <p className={styles.title}>This is index page.</p>
+                <p className={styles.title}>This is list page.</p>
             </div>
         )
     }
