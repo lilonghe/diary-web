@@ -4,7 +4,7 @@ var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlug
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 
-const vendors = ["react","react-dom","mobx","mobx-react","axios"];
+const vendors = ["react","react-dom","mobx","mobx-react","axios","react-router-dom"];
 
 module.exports = {
     output: {
