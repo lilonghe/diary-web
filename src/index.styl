@@ -1,12 +1,13 @@
 :global {
-    *{ margin: 0; padding: 0;}
+    *{ margin: 0; padding: 0; box-sizing: border-box; }
     a { text-decoration: none; }
     body {
         margin: 0;
         padding: 0;
         font-family: sans-serif;
-        font-size: 12px;
+        font-size: 14px;
         color: rgba(0, 0, 0, 0.65);
+        font-weight: 300;
     }
 
     .wrapper{
@@ -50,6 +51,12 @@
     }
     header .copy a,header .copy a:visited,header .no-login a{
         color: #FFF;
+    }
+
+    .marked-view{
+        p {
+            margin-bottom: 1em;
+        }
     }
 
 }

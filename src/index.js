@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
 import './index.styl';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { Provider } from 'mobx-react';
+
+import sessionStore from './stores/session';
+import diaryStore from './stores/diary';
 
 ReactDOM.render(
-  <Router>
-    <Route path="/" component={App}/>
-  </Router>,
+  <Provider session={sessionStore} diary={diaryStore}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 

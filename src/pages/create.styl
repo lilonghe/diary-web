@@ -1,0 +1,73 @@
+.workspace{
+    display: flex;
+}
+.editorWorkspace{
+    flex:1;
+    textarea {
+        resize: none;
+    }
+}
+.tags{
+    width: 130px;
+    margin-left: 20px;
+    text-align: right;
+}
+.tags input{
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    padding: 4px 7px;
+    width: 100%;
+    height: 25px;
+    cursor: text;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    transition: all .3s;
+}
+
+.submitBtn{
+    margin-top: 20px;
+    background-color: #108ee9;
+    line-height: 28px;
+    height: 28px;
+    padding: 0 15px;
+    border: 0;
+    outline: none;
+    color: #FFF;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.editorWorkspace{
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid #CCC;
+}
+.editorWorkspace{
+    textarea {
+        flex: 1;
+        word-break: break-all;
+        padding: 10px 10px;
+        border: none;
+        border-right: 1px solid #CCC;
+        outline: none;
+    }
+    .preview{
+        flex: 1;
+        font-size: 14px;
+        padding: 10px 10px;
+        height: 340px;
+        overflow: scroll;
+        word-break: break-all;        
+    }
+}
+blockquote {
+  border-left: 5px solid #eee;
+  /*margin-left: 20px;*/
+  padding-left: 15px;
+}

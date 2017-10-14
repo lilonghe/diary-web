@@ -1,5 +1,6 @@
 {
   "plugins": [
+    "transform-runtime",
     "transform-decorators-legacy",
     "syntax-dynamic-import"
   ],
@@ -9,6 +10,7 @@
         "modules": false
       }
     ],
-    "react"
+    "react",
+    "stage-0"
   ]
 }

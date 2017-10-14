@@ -4,7 +4,7 @@ var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlug
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 
-const vendors = ["react","react-dom","mobx","mobx-react","axios","react-router-dom"];
+const vendors = ["react","react-dom","mobx","mobx-react","axios","react-router-dom", "marked"];
 
 module.exports = {
     output: {
@@ -16,7 +16,7 @@ module.exports = {
         vendor: vendors,
     },
     plugins: [
-        // new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin(),
         new webpack.DllPlugin({
             path: path.resolve("build/manifest.json"),
             name: '[name]_[chunkhash]',
