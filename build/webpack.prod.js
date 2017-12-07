@@ -12,9 +12,13 @@ module.exports = {
   module: {
     rules: config.rules
   },
+  stats: 'none',
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new BundleAnalyzerPlugin(),
+    ...config.plugins,
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    }),
+    // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       vendorName: vender.name + '.js',

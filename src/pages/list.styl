@@ -3,6 +3,11 @@
     border: 1px dashed #CCC;
     padding: 20px;
     position: relative;
+    line-height: 1.4;
+    overflow: hidden;
+    .view {
+        min-height: 1em;
+    }
 
     .meta {
         position: absolute;
@@ -10,7 +15,7 @@
         bottom: 10px;
         text-align: right;
         .tag{
-            padding: 0 8px;
+            padding: 2px 8px;
             line-height: 20px;
             margin-left: 8px;
             border-radius: 4px;
@@ -20,5 +25,23 @@
         color: #999;
         line-height: 20px;
         margin-right: 4px;
+    }
+}
+
+@media screen and (max-width: 414px) { 
+    .diaryItem {
+        padding-bottom: 50px;
+        padding: 1em;    
+        
+        .meta {
+            position: static;    
+            margin-bottom: -5px;
+            .tag {
+                display: inline-block;
+                text-align: left; 
+                margin-bottom: 5px;   
+                vertical-align: middle;
+            }
+        }
     }
 }

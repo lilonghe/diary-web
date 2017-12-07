@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import styles from "./create.styl";
 import { inject, observer } from 'mobx-react';
 import marked from 'marked';
+import AddVolumeRecord from '../components/AddVolumeRecord';
 
 @inject('diary')
 @observer
@@ -10,10 +11,12 @@ export default class Create extends Component {
         super(props);
 
         this.state = {
-            code: '## Hello',
+            code: '',
             mood: '',
             weather: '',
-            location: ''
+            location: '',
+            showRecord: false,
+            mode: 'normal'
         };
         this.openid = window.diary_openid;
     }
@@ -47,11 +50,15 @@ export default class Create extends Component {
     }
 
      commit = async () => {
+        if(this.state.code=="") {
+            if (!confirm("没有输入内容哦! 确认要提交吗？")) return;
+        }
         let { err } = await this.props.diary.post({
             content: this.state.code,
             weather: this.state.weather,
             mood: this.state.mood,
-            location: this.state.location
+            location: this.state.location,
+            record: this.state.showRecord ? this.recordData : ''
         });
         if(err) {
             alert(err);
@@ -61,14 +68,25 @@ export default class Create extends Component {
         }
     }
 
+    toggleRecord = () => {
+        this.setState({
+            showRecord: !this.state.showRecord
+        })
+    }
+
+    setRecord = (record) => {
+        console.log(record)
+        this.recordData = record;
+    }
+
     render() {
         var html = marked(this.state.code);
         return (
             <div className="page-park">
-                <div className="wrapper">
+                <div className="edit-wrapper">
                         <div className={styles.workspace}>
                             <div className={styles.editorWorkspace}>
-                                <textarea onChange={(e) => this.updateCode(e.target.value)}>{this.state.code}</textarea>
+                                {!this.state.previewMode && <textarea placeholder="## Hope you have a good day" onChange={(e) => this.updateCode(e.target.value)}>{this.state.code}</textarea>}
                                 <div className={styles.preview+" marked-view"} dangerouslySetInnerHTML={{__html: html}}></div>
                             </div>
                             <div className={styles.tags}>
@@ -91,10 +109,14 @@ export default class Create extends Component {
                                     <option value="小雨"></option>
                                     <option value="高温"></option>
                                 </datalist>
+                                <button onClick={this.toggleRecord} className="button">{this.state.showRecord ? '移除声音' : '添加声音'}</button>
                             </div>
                         </div>
                         <p>注：每天可以提交一次，提交后不可修改</p>
-                        <button className={styles.submitBtn} onClick={this.commit}>Submit</button>
+                        <p>附：虽然此内容只有你自己可以看，请不要保留任何精确信息</p>
+                        
+                        {this.state.showRecord && <div style={{marginTop: 10}}><AddVolumeRecord setRecord={this.setRecord} /></div> }
+                        <button className={styles.submitBtn} onClick={this.commit}>提交</button>
                 </div>
             </div>
         )

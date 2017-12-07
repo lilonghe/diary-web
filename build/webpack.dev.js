@@ -10,9 +10,8 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     inline: true,
-    contentBase: 'dist',
-    port: '3000',
-    quiet: false,
+    port: '80',
+    quiet: true
   },
   entry: config.entry,
   output: config.output,
@@ -23,11 +22,14 @@ module.exports = {
     rules: config.rules
   },
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
+    ...config.plugins,
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"'
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
-      vendorName: vender.name + '.js',
+      vendorName: './dist/'+vender.name + '.js',
       hash: false
     }),
     new webpack.DllReferencePlugin({

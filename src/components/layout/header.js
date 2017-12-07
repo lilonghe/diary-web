@@ -13,7 +13,7 @@ class Header extends Component {
         }
         return match.path = location.pathname ? true : false;
     }
-
+    
     render() {
         console.log(this.props);
         return (
@@ -25,8 +25,8 @@ class Header extends Component {
                 { this.props.session.user && <div className={styles.userControl}>
                     <div>
                         <ul>
-                            <NavLink exact to="/list" activeClassName="active1"><li>List</li></NavLink>
-                            <NavLink exact to="/create" activeClassName="active1"><li>Create</li></NavLink>
+                            <NavLink exact to="/list" activeClassName="active"><li>List</li></NavLink>
+                            <NavLink exact to="/create" activeClassName="active"><li>Create</li></NavLink>
                              <a onClick={() => this.props.session.logout()}><li>Logout</li></a>
                         </ul>
                     </div>
