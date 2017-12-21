@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 const asyncComponent = loadComponent => (
     class AsyncComponent extends React.Component {
         constructor(props){
@@ -19,7 +19,7 @@ const asyncComponent = loadComponent => (
                     this.setState({ Component });
                 })
                 .catch((err) => {
-                    console.error(`Cannot load component in <AsyncComponent />`);
+                    console.error('Cannot load component in <AsyncComponent />');
                     throw err;
                 });
         }

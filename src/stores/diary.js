@@ -1,4 +1,4 @@
-import { action, computed, observable } from 'mobx';
+import { action, observable } from 'mobx';
 import config from '../utils/config';
 import request from '../utils/request';	
 
@@ -14,7 +14,7 @@ class Diary {
             this.diaries = data;
         }else{
             if(data.status==401) {
-                window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}`
+                window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}`;
             }else{
                 alert(err);
             }
@@ -27,7 +27,7 @@ class Diary {
 
         if(!err){
             this.get();
-            return {}
+            return {};
         }else{
             return { err };
         }

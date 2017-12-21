@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import asyncComponent from './utils/asyncComponent';
 import { inject, observer } from 'mobx-react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
@@ -36,6 +36,6 @@ export default class App extends Component {
 
                 <Footer />
             </div>
-        )
+        );
     }
 }

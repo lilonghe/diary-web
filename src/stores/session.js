@@ -1,4 +1,4 @@
-import { action, computed, observable } from 'mobx';
+import { action, observable } from 'mobx';
 import config from '../utils/config';
 import request from '../utils/request';	
 

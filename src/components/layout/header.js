@@ -9,7 +9,7 @@ class Header extends Component {
 
     checkActionLink = (match, location) => {
         if (!match) {
-            return false
+            return false;
         }
         return match.path = location.pathname ? true : false;
     }
@@ -27,12 +27,12 @@ class Header extends Component {
                         <ul>
                             <NavLink exact to="/list" activeClassName="active"><li>List</li></NavLink>
                             <NavLink exact to="/create" activeClassName="active"><li>Create</li></NavLink>
-                             <a onClick={() => this.props.session.logout()}><li>Logout</li></a>
+                            <a onClick={() => this.props.session.logout()}><li>Logout</li></a>
                         </ul>
                     </div>
                 </div> }
             </header>
-        )
+        );
     }
 }
 

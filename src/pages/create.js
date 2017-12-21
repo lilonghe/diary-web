@@ -1,5 +1,5 @@
 import React,{ Component } from 'react';
-import styles from "./create.styl";
+import styles from './create.styl';
 import { inject, observer } from 'mobx-react';
 import marked from 'marked';
 import AddVolumeRecord from '../components/AddVolumeRecord';
@@ -50,32 +50,32 @@ export default class Create extends Component {
     }
 
      commit = async () => {
-        if(this.state.code=="") {
-            if (!confirm("没有输入内容哦! 确认要提交吗？")) return;
-        }
-        let { err } = await this.props.diary.post({
-            content: this.state.code,
-            weather: this.state.weather,
-            mood: this.state.mood,
-            location: this.state.location,
-            record: this.state.showRecord ? this.recordData : ''
-        });
-        if(err) {
-            alert(err);
-        }else{
-            this.clearTemp();
-            this.props.history.push('/list');
-        }
-    }
+         if(this.state.code=='') {
+             if (!confirm('没有输入内容哦! 确认要提交吗？')) return;
+         }
+         let { err } = await this.props.diary.post({
+             content: this.state.code,
+             weather: this.state.weather,
+             mood: this.state.mood,
+             location: this.state.location,
+             record: this.state.showRecord ? this.recordData : ''
+         });
+         if(err) {
+             alert(err);
+         }else{
+             this.clearTemp();
+             this.props.history.push('/list');
+         }
+     }
 
     toggleRecord = () => {
         this.setState({
             showRecord: !this.state.showRecord
-        })
+        });
     }
 
     setRecord = (record) => {
-        console.log(record)
+        console.log(record);
         this.recordData = record;
     }
 
@@ -84,42 +84,42 @@ export default class Create extends Component {
         return (
             <div className="page-park">
                 <div className="edit-wrapper">
-                        <div className={styles.workspace}>
-                            <div className={styles.editorWorkspace}>
-                                {!this.state.previewMode && <textarea placeholder="## Hope you have a good day" onChange={(e) => this.updateCode(e.target.value)}>{this.state.code}</textarea>}
-                                <div className={styles.preview+" marked-view"} dangerouslySetInnerHTML={{__html: html}}></div>
-                            </div>
-                            <div className={styles.tags}>
-                                <input type="text" placeholder='心情' list='mood_list' maxLength='100' onChange={ (event) => this.setState({mood: event.target.value})}/>
-                                <input type="text" placeholder='天气' list='weather_list' maxLength='100' onChange={ (event) => this.setState({weather: event.target.value})}/>
-                                <input type="textarea" placeholder='地点' maxLength='100' onChange={ (event) => this.setState({location: event.target.value})}/>
-
-                                <datalist id='mood_list'>
-                                    <option value="甜蜜"></option>
-                                    <option value="愉快"></option>
-                                    <option value="开心"></option>
-                                    <option value="无感"></option>
-                                    <option value="孤独"></option>
-                                    <option value="寂寞空虚"></option>
-                                </datalist>
-
-                                <datalist id='weather_list'>
-                                    <option value="晴天"></option>
-                                    <option value="多云"></option>
-                                    <option value="小雨"></option>
-                                    <option value="高温"></option>
-                                </datalist>
-                                <button onClick={this.toggleRecord} className="button">{this.state.showRecord ? '移除声音' : '添加声音'}</button>
-                            </div>
+                    <div className={styles.workspace}>
+                        <div className={styles.editorWorkspace}>
+                            {!this.state.previewMode && <textarea placeholder="## Hope you have a good day" onChange={(e) => this.updateCode(e.target.value)}>{this.state.code}</textarea>}
+                            <div className={styles.preview+' marked-view'} dangerouslySetInnerHTML={{__html: html}}></div>
                         </div>
-                        <p>注：每天可以提交一次，提交后不可修改</p>
-                        <p>附：虽然此内容只有你自己可以看，请不要保留任何精确信息</p>
+                        <div className={styles.tags}>
+                            <input type="text" placeholder='心情' list='mood_list' maxLength='100' onChange={ (event) => this.setState({mood: event.target.value})}/>
+                            <input type="text" placeholder='天气' list='weather_list' maxLength='100' onChange={ (event) => this.setState({weather: event.target.value})}/>
+                            <input type="textarea" placeholder='地点' maxLength='100' onChange={ (event) => this.setState({location: event.target.value})}/>
+
+                            <datalist id='mood_list'>
+                                <option value="甜蜜"></option>
+                                <option value="愉快"></option>
+                                <option value="开心"></option>
+                                <option value="无感"></option>
+                                <option value="孤独"></option>
+                                <option value="寂寞空虚"></option>
+                            </datalist>
+
+                            <datalist id='weather_list'>
+                                <option value="晴天"></option>
+                                <option value="多云"></option>
+                                <option value="小雨"></option>
+                                <option value="高温"></option>
+                            </datalist>
+                            <button onClick={this.toggleRecord} className="button">{this.state.showRecord ? '移除声音' : '添加声音'}</button>
+                        </div>
+                    </div>
+                    <p>注：每天可以提交一次，提交后不可修改</p>
+                    <p>附：虽然此内容只有你自己可以看，请不要保留任何精确信息</p>
                         
-                        {this.state.showRecord && <div style={{marginTop: 10}}><AddVolumeRecord setRecord={this.setRecord} /></div> }
-                        <button className={styles.submitBtn} onClick={this.commit}>提交</button>
+                    {this.state.showRecord && <div style={{marginTop: 10}}><AddVolumeRecord setRecord={this.setRecord} /></div> }
+                    <button className={styles.submitBtn} onClick={this.commit}>提交</button>
                 </div>
             </div>
-        )
+        );
     }
 
 }
