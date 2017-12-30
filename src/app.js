@@ -24,12 +24,12 @@ export default class App extends Component {
             <div className="container">
                 <Header location={this.props.location} />
 
-                <div className="wrapper">
+                <div className="wrapper" style={{ minHeight:window.innerHeight - 200 }}>
                     {user ? <div>
                         <Switch>
-                            <Route exact title="Diary" path="/" component={IndexPage} />
-                            <Route title="List" path="/list" component={ListPage} />
-                            <Route title="Create" path="/create" component={CreatePage} />
+                            <Route exact title="日记" path="/" component={IndexPage} />
+                            <Route title="我的日记" path="/list" component={ListPage} />
+                            <Route title="添加日记" path="/create" component={CreatePage} />
                         </Switch>
                     </div> : <div>加载中</div>}
                 </div>

@@ -25,9 +25,9 @@ class Header extends Component {
                 { this.props.session.user && <div className={styles.userControl}>
                     <div>
                         <ul>
-                            <NavLink exact to="/list" activeClassName="active"><li>List</li></NavLink>
-                            <NavLink exact to="/create" activeClassName="active"><li>Create</li></NavLink>
-                            <a onClick={() => this.props.session.logout()}><li>Logout</li></a>
+                            <NavLink exact to="/list" activeClassName="active"><li>我的日记</li></NavLink>
+                            <NavLink exact to="/create" activeClassName="active"><li>添加日记</li></NavLink>
+                            <a onClick={() => this.props.session.logout()}><li>退出</li></a>
                         </ul>
                     </div>
                 </div> }

@@ -84,8 +84,10 @@ export default class Create extends Component {
         return (
             <div className="page-park">
                 <div className="edit-wrapper">
+                    <p>请使用 Markdown 语法书写</p>
                     <div className={styles.workspace}>
-                        <div className={styles.editorWorkspace}>
+                       
+                        <div className={styles.editorWorkspace} style={{ height: window.innerHeight / 2 }}>
                             {!this.state.previewMode && <textarea placeholder="## Hope you have a good day" onChange={(e) => this.updateCode(e.target.value)}>{this.state.code}</textarea>}
                             <div className={styles.preview+' marked-view'} dangerouslySetInnerHTML={{__html: html}}></div>
                         </div>
@@ -112,8 +114,7 @@ export default class Create extends Component {
                             <button onClick={this.toggleRecord} className="button">{this.state.showRecord ? '移除声音' : '添加声音'}</button>
                         </div>
                     </div>
-                    <p>注：每天可以提交一次，提交后不可修改</p>
-                    <p>附：虽然此内容只有你自己可以看，请不要保留任何精确信息</p>
+                    <p>互联网时代，请注意保护个人隐私</p>
                         
                     {this.state.showRecord && <div style={{marginTop: 10}}><AddVolumeRecord setRecord={this.setRecord} /></div> }
                     <button className={styles.submitBtn} onClick={this.commit}>提交</button>
