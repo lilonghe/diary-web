@@ -7,10 +7,11 @@ const vender = require('./manifest.json');
 module.exports = {
   devtool: 'source-map',
   devServer: {
+    host: '0.0.0.0',
     historyApiFallback: true,
     hot: true,
     inline: true,
-    port: '80',
+    port: 8080,
     quiet: true
   },
   entry: config.entry,
