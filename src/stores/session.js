@@ -13,7 +13,7 @@ class Session {
 
     @action 
     async getUser() {
-        let {err, status, data} = await request(`${config.sso_endPoint}auth/user`);
+        let {err, status, data} = await request('auth/user');
 
         if(!err){
             this.user = data.user;
@@ -28,7 +28,7 @@ class Session {
     }
 
     logout() {
-        window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}&logout=true`
+        window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}&logout=true`;
     }
 }
 

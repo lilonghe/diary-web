@@ -1,10 +1,11 @@
 {
     "name": "日记",
     "short_name": "diary",
-    "start_url": "/index.html",
+    "start_url": "/",
     "display": "standalone",
     "theme_color": "#00bcd4",
     "background_color": "#00bcd4",
+    "scope": "/",
     "icons": [{
         "src": "ic_launcher.png",
         "sizes": "192x192",

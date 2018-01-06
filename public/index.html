@@ -11,5 +11,15 @@
     <script>window.APP_KEY="diary"</script>
     <script src="https://monitor.lilonghe.net/static/common/js_error.js"></script>
     <script src="<%= htmlWebpackPlugin.options.vendorName %>"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/public/service-worker.js').then(function (registration) {
+                // 注册成功
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function (err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        }
+    </script>
 </body>
 </html>

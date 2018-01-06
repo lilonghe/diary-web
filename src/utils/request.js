@@ -1,29 +1,36 @@
-import axios from 'axios';
+// import axios from 'axios';
 import config from './config';
 import formData from 'form-data';
+import 'isomorphic-fetch';
 
-const request = async (url, options={ query: {} }) => {
+const request = async (url, options={ method:'get', query: {} }) => {
     if(!options.method){
         options.method = 'get';
     }
     options.query.appid='llhmKEiAK9WjwsnyPxGY3hnrG';
-    console.log(options.query);
     try{
         var form = new FormData();
+        var query = '?';
         if(options.method=='post') {
             Object.keys(options.query).forEach(key => {
                 form.append(key, options.query[key]);
             });
-            console.log(formData);
+        } else {
+            Object.keys(options.query).forEach(key => {
+                query += `${key}=${options.query[key]}&`;
+            });
         }
-        let { data } = await axios({
+        
+        
+        let data = await fetch((url.indexOf('http')==-1 ? `${config.api_endPoint}${url}` : url) + query, {
             method: options.method,
-            url: url.indexOf('http')==-1 ? `${config.api_endPoint}${url}` : url,
-            data: options.method == 'post' ? form:undefined,
-            params: options.method == 'get' ? options.query:undefined,
-            withCredentials: true,
+            body: options.method == 'post' ? form:undefined,
+            credentials: 'include', //withCredentials: true,
             headers: { 'token': window.diary_token, 'openid': window.diary_openid }
+        }).then(function(response) {
+            return response.json();
         });
+
         if(data.status===401) {
             window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}`;		
         }

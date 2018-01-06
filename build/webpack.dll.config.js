@@ -4,11 +4,11 @@ var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlug
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 
-const vendors = ["react","react-dom","mobx","mobx-react","axios","react-router-dom", "marked"];
+const vendors = ['react','react-dom','mobx','mobx-react','axios','react-router-dom', 'marked'];
 
 module.exports = {
     output: {
-        path: path.resolve("dist"),
+        path: path.resolve('dist'),
         filename: '[name]_[chunkhash].js',
         library: '[name]_[chunkhash]',
     },
@@ -18,7 +18,7 @@ module.exports = {
     plugins: [
         new BundleAnalyzerPlugin(),
         new webpack.DllPlugin({
-            path: path.resolve("build/manifest.json"),
+            path: path.resolve('build/manifest.json'),
             name: '[name]_[chunkhash]',
             context: __dirname,
         }),
