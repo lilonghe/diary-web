@@ -1,5 +1,5 @@
 var config = {
-    api_endPoint:  process.env!='development' ? 'https://diary.lilonghe.net/api/' : 'http://localhost:8360/diary/',
+    api_endPoint:  process.env!='development' ? 'https://sso.lilonghe.net/diary/' : 'http://localhost:8360/diary/',
     sso_endPoint: process.env!='development' ? 'https://sso.lilonghe.net/' : 'http://localhost:8360/',
     appid: 'llhmKEiAK9WjwsnyPxGY3hnrG'
 };

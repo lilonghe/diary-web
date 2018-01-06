@@ -13,7 +13,7 @@ class Session {
 
     @action 
     async getUser() {
-        let {err, status, data} = await request('auth/user');
+        let {err, status, data} = await request(`${config.sso_endPoint}auth/user`);
 
         if(!err){
             this.user = data.user;

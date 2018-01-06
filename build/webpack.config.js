@@ -1,10 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const WebpackMessages = require('webpack-messages');
-
 module.exports = {
     entry: {
-        index: './src/index.js',
+        index: './src/index.js'
     },
     output: {
         path: path.resolve('dist'),
