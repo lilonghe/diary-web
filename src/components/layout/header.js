@@ -15,14 +15,14 @@ class Header extends Component {
     }
     
     render() {
-        console.log(this.props);
+        const { session: { user } } = this.props;
         return (
             <header>
                 <div className='copy'>
-                    <Link exact to='/'>Diary</Link> | <span>{this.props.session.user && this.props.session.user.nickname}</span>
+                    <Link exact to='/'>Diary</Link> {user && '|'} <span>{user && user.nickname}</span>
                 </div>
 
-                { this.props.session.user && <div className={styles.userControl}>
+                { user && <div className={styles.userControl}>
                     <div>
                         <ul>
                             <NavLink exact to="/list" activeClassName="active"><li>我的日记</li></NavLink>
