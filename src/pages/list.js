@@ -42,18 +42,23 @@ export default class List extends Component {
         return (
             <div>
                 {!diaries && <div>加载中</div>}
-                {diaries && diaries.map((d,i) => {
-                    return <div key={i} className={styles.diaryItem}>
-                        <div className={styles.view} dangerouslySetInnerHTML={{__html: d.generate_content}}></div>
-                        { d.record && <audio style={{marginTop: 10}} controls src={host + d.record}></audio>}
-                        <div className={styles.meta}>
-                            <span className={styles.time}>{d.date}</span><br/>
-                            <span className={styles.tag} style={{ backgroundColor: '#fde3cf', color:'#f56a00' }}>{d.location}</span>
-                            <span className={styles.tag} style={{ backgroundColor: '#fdd8e7', color:'#f5317f' }}>{d.weather}</span>
-                            <span className={styles.tag} style={{ backgroundColor: '#cfefdf', color:'#00a854' }}>{d.mood}</span>
-                        </div>
-                    </div>;
-                })}
+                {diaries && <div>
+                    <div className={styles.diarySummary}>
+                        <span>自 {diaries[0].date} 起, 你共记下了 {diaries.length} 篇日记</span>                        
+                    </div>
+                    {diaries.map((d,i) => {
+                        return <div key={i} className={styles.diaryItem}>
+                            <div className={styles.view} dangerouslySetInnerHTML={{__html: d.generate_content}}></div>
+                            { d.record && d.record != 'undefined' && <audio style={{marginTop: 10}} controls src={host + d.record}></audio>}
+                            <div className={styles.meta}>
+                                <span className={styles.time}>{d.date}</span><br/>
+                                {d.location && <span className={styles.tag} style={{ backgroundColor: '#fde3cf', color:'#f56a00' }}>{d.location}</span>}
+                                {d.weather && <span className={styles.tag} style={{ backgroundColor: '#fdd8e7', color:'#f5317f' }}>{d.weather}</span>}
+                                {d.mood && <span className={styles.tag} style={{ backgroundColor: '#cfefdf', color:'#00a854' }}>{d.mood}</span>}
+                            </div>
+                        </div>;
+                    })}
+                </div>}
             </div>
         );
     }

@@ -12,7 +12,7 @@
     <script async src="https://www.lilonghe.net/services/monitor/static/common/js_error.js"></script>
     <script src="/<%= htmlWebpackPlugin.options.vendorName %>"></script>
     <script>
-        if ('serviceWorker' in navigator) {
+        if (false && 'serviceWorker' in navigator) {
             navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
             }).catch(function (err) {

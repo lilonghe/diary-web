@@ -13,6 +13,11 @@ class Header extends Component {
         }
         return match.path = location.pathname ? true : false;
     }
+
+    logout = () => {
+        localStorage.clear();
+        this.props.session.logout();
+    }
     
     render() {
         const { session: { user } } = this.props;
@@ -27,7 +32,7 @@ class Header extends Component {
                         <ul>
                             <NavLink exact to="/list" activeClassName="active"><li>我的日记</li></NavLink>
                             <NavLink exact to="/create" activeClassName="active"><li>添加日记</li></NavLink>
-                            <a onClick={() => this.props.session.logout()}><li>退出</li></a>
+                            <a onClick={this.logout}><li>退出</li></a>
                         </ul>
                     </div>
                 </div> }

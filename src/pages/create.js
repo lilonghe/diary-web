@@ -84,7 +84,7 @@ export default class Create extends Component {
         return (
             <div className="page-park">
                 <div className="edit-wrapper">
-                    <p>请使用 Markdown 语法书写</p>
+                    <p>请使用 <a rel="noreferrer noopener" target="_blank" href="http://wowubuntu.com/markdown/index.html">Markdown</a> 语法书写</p>
                     <div className={styles.workspace}>
                        
                         <div className={styles.editorWorkspace} style={{ height: window.innerHeight / 2 }}>
