@@ -6,6 +6,10 @@ import { Provider } from 'mobx-react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './common.styl';
 
+if (process.env != 'development') {
+    console.log = () => {};
+}
+
 import sessionStore from './stores/session';
 import diaryStore from './stores/diary';
 

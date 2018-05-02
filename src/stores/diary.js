@@ -5,6 +5,16 @@ import request from '../utils/request';
 class Diary {
     @observable diaries;
     @observable state;
+    @observable summary;
+
+    @action
+    async getSummary() {
+        let { err, data } = await request('siteSummary');
+
+        if (!err) {
+            this.summary = data;
+        }
+    }
 
     @action 
     async get() {
