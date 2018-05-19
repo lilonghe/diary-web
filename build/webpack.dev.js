@@ -25,7 +25,7 @@ module.exports = {
     plugins: [
         ...config.plugins,
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': '"development"'
+            'process.env.NODE_ENV': '"development1"'
         }),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({

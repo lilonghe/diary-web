@@ -49,7 +49,7 @@ export default class List extends Component {
                     {diaries.map((d,i) => {
                         return <div key={i} className={styles.diaryItem}>
                             <div className={styles.view} dangerouslySetInnerHTML={{__html: d.generate_content}}></div>
-                            { d.record && d.record != 'undefined' && <audio style={{marginTop: 10}} controls src={host + d.record}></audio>}
+                            { d.record && d.record != 'undefined' && <audio style={{marginTop: 10}} controls src={d.record}></audio>}
                             <div className={styles.meta}>
                                 <span className={styles.time}>{d.date}</span><br/>
                                 {d.location && <span className={styles.tag} style={{ backgroundColor: '#fde3cf', color:'#f56a00' }}>{d.location}</span>}

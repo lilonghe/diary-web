@@ -9,7 +9,7 @@ class Diary {
 
     @action
     async getSummary() {
-        let { err, data } = await request('siteSummary');
+        let { err, data } = await request('diary/summary');
 
         if (!err) {
             this.summary = data;
@@ -18,22 +18,16 @@ class Diary {
 
     @action 
     async get() {
-        let {err, data} = await request('myDiaryList');
+        let { err, data } = await request('diary/list');
 
         if(!err){
             this.diaries = data;
-        }else{
-            if(data.status==401) {
-                window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}`;
-            }else{
-                alert(err);
-            }
         }
     }
 
     @action 
     async post(data) {
-        let { err } = await request('createDiary', { method: 'post', query: data });
+        let { err } = await request('diary/add', { method: 'post', query: data });
 
         if(!err){
             this.get();

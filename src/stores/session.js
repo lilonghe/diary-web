@@ -13,22 +13,21 @@ class Session {
 
     @action 
     async getUser() {
-        let {err, status, data} = await request(`${config.sso_endPoint}auth/user`);
+        let {err, data} = await request(`${config.sso_endPoint}auth/user`, { query: { appid: config.appid } });
 
         if(!err){
             this.user = data.user;
             window.diary_openid = this.user.open_id;
-        }else{
-            if(status==401) {
-                window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}`;
-            }else{
-                alert(err);
-            }
         }
     }
 
-    logout() {
-        window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}&logout=true`;
+    @action
+    async logout() {
+        let { err } = await request('user/logout');
+        if (!err) {
+            config.goSSO(true);    
+        }
+
     }
 }
 

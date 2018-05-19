@@ -1,13 +1,11 @@
 // import axios from 'axios';
 import config from './config';
-import formData from 'form-data';
 import 'isomorphic-fetch';
 
 const request = async (url, options={ method:'get', query: {} }) => {
     if(!options.method){
         options.method = 'get';
     }
-    options.query.appid='llhmKEiAK9WjwsnyPxGY3hnrG';
     try{
         var form = new FormData();
         var query = '?';
@@ -25,14 +23,13 @@ const request = async (url, options={ method:'get', query: {} }) => {
         let data = await fetch((url.indexOf('http')==-1 ? `${config.api_endPoint}${url}` : url) + query, {
             method: options.method,
             body: options.method == 'post' ? form:undefined,
-            credentials: 'include', //withCredentials: true,
-            headers: { 'token': window.diary_token, 'openid': window.diary_openid }
+            credentials: 'include',
         }).then(function(response) {
             return response.json();
         });
 
         if(data.status===401) {
-            window.location=`${config.sso_endPoint}auth/authorize?app_id=${config.appid}&redirect_uri=${window.location.href}`;		
+            config.goSSO();    
         }
         return { err: data.error, status: data.status , data: data.data };
     }catch(err){
