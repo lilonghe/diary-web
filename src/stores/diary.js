@@ -6,6 +6,7 @@ class Diary {
     @observable diaries;
     @observable state;
     @observable summary;
+    @observable mapDiaries;
 
     @action
     async getSummary() {
@@ -22,6 +23,14 @@ class Diary {
 
         if(!err){
             this.diaries = data;
+            let mapDiaries = {};
+            data.map(item => {
+                if (!mapDiaries[item.date]) {
+                    mapDiaries[item.date] = [];
+                }
+                mapDiaries[item].date.push(item);
+            });
+            this.mapDiaries = mapDiaries;
         }
     }
 
