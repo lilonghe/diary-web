@@ -28,7 +28,7 @@ class Diary {
                 if (!mapDiaries[item.date]) {
                     mapDiaries[item.date] = [];
                 }
-                mapDiaries[item].date.push(item);
+                mapDiaries[item.date].push(item);
             });
             this.mapDiaries = mapDiaries;
         }
