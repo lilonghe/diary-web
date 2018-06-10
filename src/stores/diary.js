@@ -7,6 +7,7 @@ class Diary {
     @observable state;
     @observable summary;
     @observable mapDiaries;
+    @observable motto;
 
     @action
     async getSummary() {
@@ -43,6 +44,14 @@ class Diary {
             return {};
         }else{
             return { err };
+        }
+    }
+
+    @action
+    async getMotto() {
+        let { err, data } = await request('diary/motto');
+        if (!err) {
+            this.motto = data;
         }
     }
 }
