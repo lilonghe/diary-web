@@ -9,8 +9,8 @@ const vendors = ['react','react-dom','mobx','mobx-react','isomorphic-fetch','rea
 module.exports = {
     output: {
         path: path.resolve('dist'),
-        filename: '[name].js',
-        library: '[name]',
+        filename: '[name]_[hash].js',
+        library: '[name]_[hash]',
     },
     entry: {
         vendor: vendors,
@@ -19,11 +19,11 @@ module.exports = {
         new BundleAnalyzerPlugin(),
         new webpack.DllPlugin({
             path: path.resolve('build/manifest.json'),
-            name: '[name]',
+            name: '[name]_[hash]',
             context: __dirname,
         }),
         new CleanWebpackPlugin(
-            ['dist/vender*.js'],
+            ['dist/vender_*.js'],
             {
                 root: path.resolve('./')
             }

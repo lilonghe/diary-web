@@ -36,8 +36,7 @@ export default class List extends Component {
     }
 
     render() {
-        let { diaries } = this.props.diary;
-        let host = config.sso_endPoint.substr(0, config.sso_endPoint.length-1);
+        let { diaries, mapDiaries } = this.props.diary;
 
         return (
             <div>
@@ -51,7 +50,9 @@ export default class List extends Component {
                             <div className={styles.view} dangerouslySetInnerHTML={{__html: d.generate_content}}></div>
                             { d.record && d.record != 'undefined' && <audio style={{marginTop: 10}} controls src={d.record}></audio>}
                             <div className={styles.meta}>
-                                <span className={styles.time}>{d.date}</span><br/>
+                                <span className={styles.time}>
+                                    {mapDiaries && mapDiaries[d.date].length > 1 ? d.created_at : d.date }
+                                </span><br />
                                 {d.location && <span className={styles.tag} style={{ backgroundColor: '#fde3cf', color:'#f56a00' }}>{d.location}</span>}
                                 {d.weather && <span className={styles.tag} style={{ backgroundColor: '#fdd8e7', color:'#f5317f' }}>{d.weather}</span>}
                                 {d.mood && <span className={styles.tag} style={{ backgroundColor: '#cfefdf', color:'#00a854' }}>{d.mood}</span>}
