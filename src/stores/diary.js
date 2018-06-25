@@ -23,7 +23,7 @@ class Diary {
         let { err, data } = await request('diary/list');
 
         if(!err){
-            this.diaries = data;
+            
             let mapDiaries = {};
             data.map(item => {
                 if (!mapDiaries[item.date]) {
@@ -32,6 +32,7 @@ class Diary {
                 mapDiaries[item.date].push(item);
             });
             this.mapDiaries = mapDiaries;
+            this.diaries = data;
         }
     }
 
