@@ -4,11 +4,11 @@ self.addEventListener('install', event => {
         caches.open(cacheName)                   
             .then(cache => cache.addAll([
                 '/index.html',
-                '/index.js',
-                '/index_page.js',
-                '/list_page.js',
-                '/create_page.js',
-                '/vendor.js'
+                '/create_page_396b80fb125b697e465f.js',
+                '/index_396b80fb125b697e465f.js',
+                '/index_page_396b80fb125b697e465f.js',
+                '/list_page_396b80fb125b697e465f.js',
+                '/vendor_f62dd7830db844f6457c.js'
             ]))
     );
 });

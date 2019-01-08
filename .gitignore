@@ -5,3 +5,5 @@ dist
 *.log
 
 build/manifest.json
+
+.idea/

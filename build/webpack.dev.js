@@ -11,7 +11,7 @@ module.exports = {
         historyApiFallback: true,
         hot: true,
         inline: true,
-        port: 8080,
+        port: 80,
         quiet: true
     },
     entry: config.entry,

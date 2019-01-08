@@ -6,9 +6,9 @@ import { Provider } from 'mobx-react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './common.styl';
 
-console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV != 'development') {
     console.log = () => {};
+    global.dev = false;
 }
 
 import sessionStore from './stores/session';
