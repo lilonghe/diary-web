@@ -6,4 +6,5 @@ dist
 
 build/manifest.json
 
+.idea
 .idea/
